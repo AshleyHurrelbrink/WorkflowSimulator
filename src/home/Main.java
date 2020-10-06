@@ -12,7 +12,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("views/main.fxml"));
         primaryStage.setTitle("WorkflowSimulator");
-        primaryStage.setScene(new Scene(root, 687, 442));
+        primaryStage.setScene(new Scene(root, 700, 442));
         primaryStage.show();
     }
 

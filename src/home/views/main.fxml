@@ -13,7 +13,7 @@
          <children >
 
             <!--sidebar-->
-            <VBox prefHeight="451.0" prefWidth="222.0" style="-fx-background-color: #83C5BE;">
+            <VBox  prefHeight="451.0" prefWidth="222.0" style="-fx-background-color: #83C5BE;">
                <children>
                   <VBox prefHeight="240.0" prefWidth="222.0" style="-fx-background-color: #83C5BE;" />
                   <Button fx:id="allWorkflows_button" mnemonicParsing="false" onAction="#onAllWorkflowsButtonClick" prefHeight="25.0" prefWidth="228.0" text="All Workflows" />
