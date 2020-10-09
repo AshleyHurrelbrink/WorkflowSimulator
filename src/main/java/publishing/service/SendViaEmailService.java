@@ -7,7 +7,7 @@ public class SendViaEmailService implements Service {
     }
 
     @Override
-    public void runService() {
-
+    public Object runService() {
+        return null;
     }
 }

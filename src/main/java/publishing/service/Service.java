@@ -1,5 +1,5 @@
 package publishing.service;
 
 public interface Service {
-    public void runService();
+    public Object runService();
 }

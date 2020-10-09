@@ -45,7 +45,7 @@ public class PostOnGitHubService implements Service {
     public PostOnGitHubService(Object documnet){
         GetUserDataService getUserDataService =
                 new GetUserGitHubDataService("C:\\Users\\Stefii\\Desktop\\Year_4\\CEBP\\CEBP-Project-1\\git_data.txt");
-        Hashtable<String, String> data = getUserDataService.getData();
+        Hashtable<String, String> data = (Hashtable<String, String>) getUserDataService.runService();
 
         this.localRepositoryPath = data.get("local_repository");
         this.gitHubRepositoryLink = data.get("github_repository");
@@ -58,7 +58,7 @@ public class PostOnGitHubService implements Service {
      * TO DO: allow branch selection
     */
     @Override
-    public void runService() {
+    public Object runService() {
         try {
             if (!isCloned) {
                 git = this.cloneGitHubRepository();
@@ -70,6 +70,8 @@ public class PostOnGitHubService implements Service {
         } catch (GitAPIException e) {
             e.printStackTrace();
         }
+
+        return null;
     }
 
 

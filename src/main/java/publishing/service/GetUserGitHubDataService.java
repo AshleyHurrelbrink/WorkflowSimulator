@@ -17,7 +17,7 @@ public class GetUserGitHubDataService extends GetUserDataService{
 
 
     @Override
-    public Hashtable getData() {
+    public Object runService() {
         this.processFile();
         return this.userGitHubData;
     }
