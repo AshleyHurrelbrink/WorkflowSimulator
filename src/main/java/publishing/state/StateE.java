@@ -1,26 +1,21 @@
 package publishing.state;
 
-public class StateE implements State {
-    private String currentState;
-    private String nextState;
+import publishing.model.Document;
 
-    public StateE(){
-        this.currentState = "E";
-        this.nextState = null;
+public class StateE extends State {
+
+    public StateE(Document document){
+        this.document = document;
+    }
+
+    public static void nextState(Document document) {
+        StateE stateE = new StateE(document);
+        stateE.execute();
     }
 
     @Override
-    public String getState() {
-        return this.currentState;
-    }
-
-    @Override
-    public String nextState() {
-        return this.nextState;
-    }
-
-    @Override
-    public void run() {
-
+    public void execute() {
+        System.out.println("salut din E");
+//        System.out.println(this.document.getDocument());
     }
 }

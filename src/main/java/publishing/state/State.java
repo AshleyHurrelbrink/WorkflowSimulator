@@ -1,7 +1,11 @@
 package publishing.state;
 
-public interface State {
-    public String getState();
-    public String nextState();
-    public void run();
+import publishing.model.Document;
+
+public abstract class State {
+    protected Document document;
+
+    public abstract void execute();
+
+    public static void nextState(Document document) {}
 }

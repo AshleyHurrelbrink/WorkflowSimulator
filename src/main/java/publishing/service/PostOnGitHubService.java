@@ -23,6 +23,7 @@ import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
 
 import com.google.common.io.FileWriteMode;
 import com.google.common.io.Files;
+import publishing.model.Document;
 
 
 /**
@@ -31,7 +32,7 @@ import com.google.common.io.Files;
 
 public class PostOnGitHubService implements Service {
 
-    private Object documnet;
+    private Document documnet;
 
     private String localRepositoryPath;
     private String gitHubRepositoryLink;
@@ -42,7 +43,7 @@ public class PostOnGitHubService implements Service {
     private static Git git;
 
 
-    public PostOnGitHubService(Object documnet){
+    public PostOnGitHubService(Document documnet){
         GetUserDataService getUserDataService =
                 new GetUserGitHubDataService("C:\\Users\\Stefii\\Desktop\\Year_4\\CEBP\\CEBP-Project-1\\git_data.txt");
         Hashtable<String, String> data = (Hashtable<String, String>) getUserDataService.runService();
@@ -63,7 +64,7 @@ public class PostOnGitHubService implements Service {
             if (!isCloned) {
                 git = this.cloneGitHubRepository();
             }
-            this.addDocumentToLocalRepository(git,"This is it", "docs");
+            this.addDocumentToLocalRepository(git,documnet.getDocument(), "docs");
             this.commitChanges(git);
             this.pushToGitHub(git);
 

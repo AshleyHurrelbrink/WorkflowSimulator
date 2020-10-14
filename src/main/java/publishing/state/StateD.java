@@ -1,27 +1,24 @@
 package publishing.state;
 
-public class StateD implements State{
+import publishing.model.Document;
+import publishing.service.Service;
 
-    private String currentState;
-    private String nextState;
+public class StateD extends State{
 
-    public StateD(){
-        this.currentState = "D";
-        this.nextState = null;
+    public StateD(Document document){
+       this.document = document;
+    }
+
+    public static void nextState(Document document) {
+        StateD stateD = new StateD(document);
+        stateD.execute();
     }
 
     @Override
-    public String getState() {
-        return this.currentState;
-    }
-
-    @Override
-    public String nextState() {
-        return this.nextState;
-    }
-
-    @Override
-    public void run() {
-
+    public void execute() {
+        System.out.println("salut din D");
+//        System.out.println(this.document.getDocument());
+//        Service postOnGitHubService = new PostOnGitHubService(Document document);
+//        postOnGitHubService.runService();
     }
 }
