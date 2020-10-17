@@ -1,6 +1,7 @@
 package publishing.state;
 
 import publishing.model.Document;
+import publishing.service.PostOnGitHubService;
 import publishing.service.Service;
 
 public class StateD extends State{
@@ -16,9 +17,9 @@ public class StateD extends State{
 
     @Override
     public void execute() {
-        System.out.println("salut din D");
-//        System.out.println(this.document.getDocument());
-//        Service postOnGitHubService = new PostOnGitHubService(Document document);
-//        postOnGitHubService.runService();
+//        System.out.println("salut din D");
+
+        PostOnGitHubService postOnGitHubService = new PostOnGitHubService(this.document);
+        postOnGitHubService.runService();
     }
 }

@@ -4,25 +4,17 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.nio.charset.Charset;
-import java.util.Arrays;
 import java.util.Hashtable;
-import java.util.Optional;
 
 import org.eclipse.jgit.api.Git;
-import org.eclipse.jgit.api.ListBranchCommand.ListMode;
 import org.eclipse.jgit.api.Status;
 import org.eclipse.jgit.api.errors.GitAPIException;
-import org.eclipse.jgit.api.errors.InvalidRemoteException;
-import org.eclipse.jgit.api.errors.TransportException;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.lib.TextProgressMonitor;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.transport.PushResult;
 import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
 
-import com.google.common.io.FileWriteMode;
-import com.google.common.io.Files;
 import publishing.model.Document;
 
 
@@ -30,9 +22,9 @@ import publishing.model.Document;
     TO DO: implementation on threads
 */
 
-public class PostOnGitHubService implements Service {
+public class PostOnGitHubService{
 
-    private Document documnet;
+    private Document document;
 
     private String localRepositoryPath;
     private String gitHubRepositoryLink;
@@ -43,11 +35,12 @@ public class PostOnGitHubService implements Service {
     private static Git git;
 
 
-    public PostOnGitHubService(Document documnet){
+    public PostOnGitHubService(Document document){
         GetUserDataService getUserDataService =
-                new GetUserGitHubDataService("C:\\Users\\Stefii\\Desktop\\Year_4\\CEBP\\CEBP-Project-1\\git_data.txt");
+                new GetUserDataService("C:\\Users\\Stefii\\Desktop\\Year_4\\CEBP\\CEBP-Project-1\\git_data.txt");
         Hashtable<String, String> data = (Hashtable<String, String>) getUserDataService.runService();
 
+        this.document = document;
         this.localRepositoryPath = data.get("local_repository");
         this.gitHubRepositoryLink = data.get("github_repository");
         this.authenticationToken = data.get("authentication_token");
@@ -58,21 +51,18 @@ public class PostOnGitHubService implements Service {
     /**
      * TO DO: allow branch selection
     */
-    @Override
-    public Object runService() {
+    public void runService() {
         try {
             if (!isCloned) {
                 git = this.cloneGitHubRepository();
             }
-            this.addDocumentToLocalRepository(git,documnet.getDocument(), "docs");
+            this.addDocumentToLocalRepository(git, document.getDocument(), "docs");
             this.commitChanges(git);
             this.pushToGitHub(git);
 
         } catch (GitAPIException e) {
             e.printStackTrace();
         }
-
-        return null;
     }
 
 

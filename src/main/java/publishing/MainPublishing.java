@@ -1,10 +1,5 @@
 package publishing;
 
-import publishing.service.GetUserDataService;
-import publishing.service.GetUserGitHubDataService;
-import publishing.service.PostOnGitHubService;
-import publishing.service.SendViaEmailService;
-import publishing.state.StateA;
 import publishing.workflow.Workflow;
 
 public class MainPublishing {
@@ -17,8 +12,9 @@ public class MainPublishing {
 //        postOnGitHubService1.runService();
 //        SendViaEmailService sendViaEmailService = new SendViaEmailService();
         Workflow workflow = new Workflow();
-        Workflow workflow1 = new Workflow();
-        Workflow workflow2 = new Workflow();
+//        Workflow workflow1 = new Workflow();
+//        Workflow workflow2 = new Workflow();
+
 
     }
 }
