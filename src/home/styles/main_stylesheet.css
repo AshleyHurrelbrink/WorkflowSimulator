@@ -1,0 +1,13 @@
+.button_menu{
+    -fx-background-color:#000000;
+    -fx-font-family: 'Arial Narrow';
+    -fx-font-size: 20px;
+    -fx-text-fill: #ffffff;
+    -fx-alignment:top-center;
+
+}
+.button_menu:hover{
+    -fx-background-color:#83C5BE;
+}
+
+

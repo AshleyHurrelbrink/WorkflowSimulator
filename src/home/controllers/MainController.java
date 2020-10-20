@@ -59,6 +59,5 @@ public class MainController implements Initializable {
         Stage stage=(Stage)((Button)event.getSource()).getScene().getWindow();
         stage.setIconified(true);
     }
-
 }
 
