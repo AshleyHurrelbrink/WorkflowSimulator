@@ -1,15 +1,23 @@
 package project;
 
+import java.util.ArrayList;
+
 public class Config {
-    //filename
-    //arraylist<State> config
+    private String fileName;
+    private ArrayList<State> statesConfig = new ArrayList();
 
-    //public Arraylist<State> getConfig(){
-    // return config;
-    // }
+    public Config(String filename){
+        this.fileName=filename;
+    }
 
-    //public void readConfigFile(){
-    // for read file()
-    //    config.add(new State("A",1,"++"))} --> Ex: A,1++
+    public ArrayList<State> getConfig(){
+        return statesConfig;
+    }
+
+    public void readConfigFile() {
+        //file open checks
+        // for read file()
+        //    statesConfig.add(new State("A",1,"++"))} --> Ex: A,1++
+    }
 
 }
