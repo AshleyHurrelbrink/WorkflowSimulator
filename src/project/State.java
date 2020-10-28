@@ -1,46 +1,44 @@
 package project;
+
 import java.util.concurrent.Semaphore;
 
 public class State extends Thread{
-    //next states
-    //name
-    //start
-    //stop
-    //conditii de next
 
-    //print ("suntem in state "name" ")
-    //set global variable:
+    private Semaphore sem;
+    private String stateName;
+    private int startCondition;
+    private String nextState;
 
-    Semaphore sem;
-    String stateName;
-    int cond;
-    String nextState;
-
-    public State(Semaphore sem, String stateName, int cond, String nextState)
+    public State(Semaphore sem, String stateName, int startCondition, String nextState)
     {
         super(stateName);
         this.sem = sem;
         this.stateName = stateName;
-        this.cond = cond;
+        this.startCondition = startCondition;
         this.nextState = nextState;
     }
+
 
     @Override
     public void run() {
 
-        System.out.println("Starting " + stateName);
+        System.out.println("STARTING " + "["+ stateName + "]");
         try {
-            System.out.println(stateName + " is waiting for permit");
+            System.out.println("["+ stateName + "] -> " + "is waiting for permit");
 
             sem.acquire();
-            System.out.println(stateName + " gets permit");
+            System.out.println("["+ stateName + "] -> " + "gets permit");
 
-            int n = stateName.length();
-
-            for (int i = 0; i < n; i++) {
+            if(this.nextState.charAt(0)=='+'){
                 Shared.count++;
-                System.out.println(stateName + ": " + Shared.count);
-
+                System.out.println("["+ stateName + "] -> " +"(action: +) changes count to" + ": " + Shared.count);
+                updateNextState();
+                Thread.sleep(10);
+            }
+            else if(this.nextState.charAt(0)=='-'){
+                Shared.count--;
+                System.out.println("["+ stateName + "] -> " +"(action: -) changes count to" + ": " + Shared.count);
+                updateNextState();
                 Thread.sleep(10);
             }
 
@@ -48,7 +46,26 @@ public class State extends Thread{
             System.out.println(exc);
         }
 
-        System.out.println(stateName + " releases the permit.");
+        System.out.println("["+ stateName + "] -> " + "releases the permit.");
         sem.release();
     }
+
+    public int getStartCondition(){
+        return this.startCondition;
+    }
+
+    public String getNextState(){
+        return this.nextState;
+    }
+
+    public Semaphore getSem(){
+        return this.sem;
+    }
+
+    public void updateNextState(){
+        int len = this.nextState.length();
+        this.nextState = this.nextState.substring(1,len);
+        System.out.println("["+ stateName + "] -> nextState = " + this.nextState);
+    }
+
 }

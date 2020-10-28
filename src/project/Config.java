@@ -10,14 +10,15 @@ public class Config {
         this.fileName=filename;
     }
 
-    public ArrayList<State> getConfig(){
+    public ArrayList<State> getStatesConfig(){
         return statesConfig;
     }
 
     public void readConfigFile() {
         //file open checks
+        //Semaphore sem = new Semaphore(1);
         // for read file()
-        //    statesConfig.add(new State("A",1,"++"))} --> Ex: A,1++
+        //    statesConfig.add(new State(sem,"A",1,"++"))} --> Ex: A,1++
     }
 
 }
